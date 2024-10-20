@@ -3,56 +3,84 @@ import './App.css'
 
 function App() {
 
-  // const [show, setShow] = useState(false);
-  // const checkAccordion = () => {
-  //   setShow(!show);
-  // }
-
-  const [accordion, setAccrodion] = useState(null);
-  const data = [
-    {
-      header: "Header 01",
-      content: 'conntent 01'
-    },
-    {
-      header: "Header 02",
-      content: 'conntent 02'
-    },
-    {
-      header: "Header 03",
-      content: 'conntent 03'
-    },
-    {
-      header: "Header 04",
-      content: 'conntent 04'
-    },
-  ]
-
-  const handleClick = (i) => {
-    setAccrodion(i)
-  }
 
   return (
     <>
-      {/* <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-        <h1>Accordion</h1>
-        <button onClick={checkAccordion} style={{ height: "30px", fontSize: "20px", display: "flex", alignItems: "center" }}>{show ? "-" : "+"}</button>
-      </div>
-      {show && <p>Hey ! this is Accordion</p>} */}
-
-      <div>
-        {data && data.map((item, index) => {
-          return (
-            <div onClick={() => handleClick(index)}>              
-            
-            <div className="header">{item.header}</div>
-              {accordion === index && <div>{item.content}</div>}
-            </div>
-          )
-        })}
-      </div>
+      <BasicAccordion />
+      <MediumLevelAcccodion/>
     </>
   )
 }
 
 export default App
+
+
+
+function BasicAccordion() {
+  const [showText, sethowText] = useState(false);
+
+  const showAccordion = () =>{
+    sethowText(!showText)
+  }
+  return (<>
+    <h1>Basic Accordion</h1>
+    <div style={{display:"flex", alignItems:"center",gap:"10px", maxHeight:"30px"}}>
+      <h4>Show Accordion</h4>
+      <button onClick={()=>showAccordion()}>{showText ? "-" : "+"}</button>
+      {showText && <p>Hello world</p>}    
+    </div>
+   
+  </>)
+}
+
+
+
+
+function MediumLevelAcccodion (){
+  const [showAccordion, setShowwAccordion] = useState(null);
+
+  const data = [
+    {
+      header:"header 1",
+      content: 'content 1'
+    },
+    {
+      header:"header 2",
+      content: 'content 2'
+    },
+    {
+      header:"header 3",
+      content: 'content 3'
+    },
+    {
+      header:"header 4",
+      content: 'content 4'
+    },
+
+  ]
+
+  const handleClick = (i) =>{
+
+    console.log(i);
+    setShowwAccordion(i);
+  }
+  
+  return(
+    <>
+    <h1>medium level</h1>
+
+    <div>
+      {data.map((value,index)=>{
+        return(
+          <div onClick={()=>handleClick(index)}>
+            <h4>
+              {value.header}
+            </h4>
+            {showAccordion === index && <p>{value.content}</p>}
+          </div>
+        )
+      })}
+    </div>
+    </>
+  )
+}
